@@ -1,0 +1,27 @@
+#!/usr/bin/pulseaudio -nF
+#
+# Example PulseAudio system configuration
+# /etc/pulse/system.pa
+#
+
+# ALSA soundcard
+load-module module-alsa-card device_id=0 sink_name=alsahw0 rate=48000
+
+# native clients
+load-module module-native-protocol-unix
+
+# failsafe stuff
+load-module module-default-device-restore
+load-module module-rescue-streams
+load-module module-always-sink
+load-module module-intended-roles
+
+# suspend if not running
+load-module module-suspend-on-idle
+
+# set output sink
+set-default-sink alsahw0
+
+# RTP receive
+load-module module-rtp-recv latency_msec=1000 sap_address=224.0.0.56            # multicast.
+load-module module-rtp-recv latency_msec=1000 sap_address=192.168.XXX.XXX       # unicast. replace with node IP
