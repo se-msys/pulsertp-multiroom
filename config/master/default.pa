@@ -25,4 +25,3 @@ load-module module-null-sink sink_name=master rate=44100 sink_properties=device.
 # set output sink
 set-default-sink master
 
-

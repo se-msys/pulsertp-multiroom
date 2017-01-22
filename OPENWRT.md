@@ -1,12 +1,12 @@
-Pulse RTP receiver on OpenWRT
-=============================
+PulseAudio RTP receiver on OpenWRT
+==================================
 
 I good advice in general is to use similar platforms and audio-interfaces. I use Atheros AR71xx-based with PCM2704 USB audio.
-If possible, run a NTP service on the sender node, to make sure the sender and receiver have as synchronized clocks as possible.
+If possible, run a NTP service on the sender/master node, to make sure the sender and receiver have as synchronized system clock as possible.
 
-#. Configure networking for your needs on the new node. This is a simple "client node" setup I use for a GL.Inet "3G-Router"
+* Configure networking for your needs on the new node. This is a simple "client node" setup I use for a GL.Inet "3G-Router"
 
-`/etc/config/network`:
+__/etc/config/network:__
 
     config interface 'loopback'
         option ifname 'lo'
@@ -22,9 +22,9 @@ If possible, run a NTP service on the sender node, to make sure the sender and r
         option ifname 'wlan0'
         option proto 'dhcp'
 
-5. Configure NTP     
+* Configure NTP     
 
-`/etc/config/system`:
+__/etc/config/system:__
 
     config system
         option hostname MyReceiverName
@@ -35,19 +35,23 @@ If possible, run a NTP service on the sender node, to make sure the sender and r
         option enabled 1
         option enable_server 0
 
-1. Get the OpenWRT Imagebuilder for your platform
+* Get the OpenWRT Imagebuilder for your platform.
 
-2. Build a image with needed packages. You also might want to skip some firewall-related stuff to conserve flash.
+* Build a image with needed packages. You also might want to skip some firewall/router-related packages to conserve flash.
 
 `make image PACKAGES="-dnsmasq -iptables -ip6tables -ppp -kmod-ppp -ppp-mod-pppoe -kmod-pppox -kmod-nf-nathelper -firewall -odhcpd -odhcp6c -swconfig kmod-usb2 kmod-usb-audio alsa-lib alsa-utils libstdcpp pulseaudio-daemon pulseaudio-profiles pulseaudio-tools"`
 
-3. Login to current system. Transfer new firmware image to device and upgrade. Device will reboot when done.
+* Transfer new firmware to device
+
+`scp bin/ar71xx/openwrt-15.05.1-ar71xx-generic-*-squashfs-sysupgrade.bin 192.168.xxx.xxx:/tmp/`
+
+* Login to current system and perform sysupgrade with the file you just uploaded. Device will reboot when done.
 
 `sysupgrade /tmp/openwrt...`
 
-4. Use the following minimal configuration for PulseAudio
+* Use the following minimal configuration for PulseAudio
 
-`/etc/pulse/system.pa`:
+__/etc/pulse/system.pa:__
 
     #!/usr/bin/pulseaudio -nF
     load-module module-switch-on-port-available
@@ -60,13 +64,12 @@ If possible, run a NTP service on the sender node, to make sure the sender and r
 
     # rtp receive
     load-module module-rtp-recv latency_msec=1000 sap_address=224.0.0.56
-    load-module module-rtp-recv latency_msec=1000 sap_address=192.168.123.123      # for unicast
+    load-module module-rtp-recv latency_msec=1000 sap_address=192.168.xxx.xxx      # for unicast
 
 __Note!__ `latency_msec` might need some individual adjustment. For example I use 1000ms on a wired node, but 1002ms on a wireless, since the wireless seems to introduce ~2ms of latency.
     
-5. Make sure that PulseAudio starts 
+* Make sure that PulseAudio starts 
 
-`/etc/init.d/pulseaudio enable`
-`/etc/init.d/pulseaudio start`
-
+    /etc/init.d/pulseaudio enable
+    /etc/init.d/pulseaudio start
 
