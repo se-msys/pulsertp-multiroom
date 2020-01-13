@@ -44,8 +44,19 @@ My setup
 --------
 I run the Master and playback applications on my Linux-based NAS/mini-server.
 
-* One receiver on wired Ethernet running OpenWRT (GL.Inet, Atheros ar71xx, PCM2704 USB Audio)
-* One receiver on a Rasperry Pi 3 (PCM2704 USB Audio)
+* One receiver on wired Ethernet running OpenWRT (GL.Inet, Atheros ar71xx, PCM2704 USB-Audio S/PDIF to Receiver)
+* One receiver on a Rasperry Pi 3 (PCM2704 USB-Audio analog to Class-D amp)
+
+Known issues
+------------
+* Sometimes when starting a stream, it __starts__ completly out of sync, so bad that it will never find itself in sync. Performing an extra stop/start usually fixes it.
+
+* After a while some crackling sound may introduce itself, but often it disappears of its own after a while. Might be USB-Audio related, or some buffert bug in PulseAudio, not sure.
+
+
+
+
+
 
 
 
