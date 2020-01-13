@@ -32,9 +32,9 @@ Clients
 -------
 A client can be any playback application with PulseAudio backend support, or can output PCM as a UNIX-pipe. You can also configure a soundcard input as source.
 
-    * [https://github.com/mikebrady/shairport-sync](Shairport-sync) - Apple® AirPlay™ compatible receiver
-    * [https://github.com/librespot-org/librespot](librespot) - Spotify® Connect compatible player  
-    * [https://www.musicpd.org/](mpd) - Plays locally stores music headless
+* [https://github.com/mikebrady/shairport-sync](Shairport-sync) - Apple® AirPlay™ compatible receiver
+* [https://github.com/librespot-org/librespot](librespot) - Spotify® Connect compatible player  
+* [https://www.musicpd.org/](mpd) - Plays locally stores music headless
 
 
 
@@ -42,8 +42,8 @@ My setup
 --------
 I run the Master and playback applications on my Linux-based NAS/mini-server.
 
-    * One receiver on wired Ethernet running OpenWRT (GL.Inet, Atheros ar71xx, PCM2704 USB Audio)
-    * One receiver on a Rasperry Pi 3 (PCM2704 USB Audio)
+* One receiver on wired Ethernet running OpenWRT (GL.Inet, Atheros ar71xx, PCM2704 USB Audio)
+* One receiver on a Rasperry Pi 3 (PCM2704 USB Audio)
 
 
 
