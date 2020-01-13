@@ -55,7 +55,7 @@ __/etc/pulse/system.pa:__
 
     #!/usr/bin/pulseaudio -nF
     load-module module-switch-on-port-available
-    load-module module-alsa-card device_id=0 sink_name=alsahw0 rate=48000
+    load-module module-alsa-sink device=hw:0,0 sink_name=alsahw0 rate=48000
     load-module module-native-protocol-unix
     load-module module-suspend-on-idle
 
@@ -63,8 +63,17 @@ __/etc/pulse/system.pa:__
     set-default-sink alsahw0
 
     # rtp receive
-    load-module module-rtp-recv latency_msec=1000 sap_address=224.0.0.56
+    #load-module module-rtp-recv latency_msec=1000 sap_address=224.0.0.56
     load-module module-rtp-recv latency_msec=1000 sap_address=192.168.xxx.xxx      # for unicast
+
+
+__/etc/pulse/daemon.conf__
+
+    high-priority = yes
+    nice-level = -11
+    log-target = syslog
+    log-level = info
+
 
 __Note!__ `latency_msec` might need some individual adjustment. For example I use 1000ms on a wired node, but 1002ms on a wireless, since the wireless seems to introduce ~2ms of latency.
     

@@ -1,11 +1,8 @@
 #!/usr/bin/pulseaudio -nF
 #
-# Example PulseAudio global user configuration
+# Example PulseAudio user configuration
 # /etc/pulse/default.pa
 #
-
-# ALSA soundcard
-load-module module-alsa-card device_id=0 sink_name=alsahw0 rate=48000
 
 # native clients
 load-module module-native-protocol-unix
@@ -17,7 +14,7 @@ load-module module-always-sink
 load-module module-intended-roles
 
 # suspend if not running
-load-module module-suspend-on-idle
+load-module module-suspend-on-idle timeout=3
 
 # loopback sink 
 load-module module-null-sink sink_name=master rate=44100 sink_properties=device.description="master"
