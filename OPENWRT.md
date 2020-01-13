@@ -78,6 +78,8 @@ __/etc/pulse/daemon.conf__
 __Note!__ `latency_msec` might need some individual adjustment. For example I use 1000ms on a wired node, but 1002ms on a wireless, since the wireless seems to introduce ~2ms of latency.
     
 * Make sure that PulseAudio starts 
+
 `/etc/init.d/pulseaudio enable`
+
 `/etc/init.d/pulseaudio start`
 
