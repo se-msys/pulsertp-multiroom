@@ -1,10 +1,17 @@
 #!/bin/bash
 #
-# PulseRTP-Multiroom
+# PulseRTP-Multiroom - Auto-shutdown process
 # <https://github.com/se-msys/pulsertp-multiroom> 
-#   Unloads RTP sender modules to avoid duplicate streams and network load
 #
+lockfile="/tmp/pulsertpm-librespot.lock"
 
+# save this pid
+echo $$ >$lockfile
+
+# sleep
+sleep 60
+
+# unload modules
 IFS=$'\n'
 for rtpn in `pactl list modules short|grep module-rtp-send`; do
     PAM_ID=`echo $rtpn|awk '{print $1}'`
@@ -12,3 +19,8 @@ for rtpn in `pactl list modules short|grep module-rtp-send`; do
     echo " * unload-module id $PAM_ID"
 done
 
+# remove lock
+rm -f $lockfile
+
+# exit
+exit 0

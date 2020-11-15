@@ -7,7 +7,7 @@
 # ALSA output
 load-module module-alsa-sink sink_name=alsahw0 device=hw:0,0 rate=48000
 
-# If USB-Audio, try with tsched=0
+# On crackling USB-Audio dongles, try with tsched=0
 #load-module module-alsa-sink sink_name=alsahw0 device=hw:0,0 rate=48000 tsched=0
 
 # native clients
@@ -27,4 +27,4 @@ set-default-sink alsahw0
 
 # RTP receive
 load-module module-rtp-recv latency_msec=1000 sap_address=224.0.0.56            # multicast mode
-load-module module-rtp-recv latency_msec=1000 sap_address=192.168.XXX.XXX       # unicast mode, replace with node IP
+#load-module module-rtp-recv latency_msec=1000 sap_address=192.168.XXX.XXX      # unicast mode, replace with node IP

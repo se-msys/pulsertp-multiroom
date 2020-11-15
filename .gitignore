@@ -1,3 +1,9 @@
 .AppleDouble
 .DS_Store
+.pyc
+*.sublime-project
+*.sublime-workspace
+__pycache__
+manager/
+pumrc/
 

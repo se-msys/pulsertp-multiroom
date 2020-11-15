@@ -17,8 +17,8 @@ load-module module-intended-roles
 load-module module-suspend-on-idle timeout=3
 
 # loopback sink 
-load-module module-null-sink sink_name=master rate=44100 sink_properties=device.description="master"
+load-module module-null-sink sink_name=rtp1 format=s16be channels=2 rate=44100 sink_properties=device.description="master"
 
 # set output sink
-set-default-sink master
+set-default-sink rtp1
 
