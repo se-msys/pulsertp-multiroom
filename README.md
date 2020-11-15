@@ -14,7 +14,7 @@ It can be any Linux system with enough juice to run PulseAudio and the desired p
 
 The playback application may call the scripts `scripts/pulsertpm-start.sh` and `scripts/pulsertpm-stop.sh` according to the condition, __or__ the `rtp-send` lines could be placed in your `/etc/pulse/default.pa` permanently.
 
-If you are running [https://github.com/librespot-org/librespot|librespot], then use `scripts/pulsertpm-librespot.sh`.
+If you are running [Librespot](https://github.com/librespot-org/librespot), then use `scripts/pulsertpm-librespot.sh`.
 
 __Note!__ Beware that running multicast audio over wireless networks will *severly* affect all your wireless devices, and will drain the battery on your mobile devices (they are forced to wake up and process packets). I strongly recommend always using unicast-mode when using in wireless networks shared with other devices.
 
@@ -36,9 +36,9 @@ Playback clients
 ----------------
 A client can be any playback application with PulseAudio backend support, or can output PCM as a UNIX-pipe. You can also configure a soundcard input as source.
 
-* [https://github.com/mikebrady/shairport-sync|Shairport-sync] - Apple® AirPlay™ compatible receiver
-* [https://github.com/librespot-org/librespot|librespot] - Spotify® Connect compatible player  
-* [https://www.musicpd.org|mpd] - Plays locally stored music headless
+* [Shairport-sync](https://github.com/mikebrady/shairport-sync) - Apple® AirPlay™ compatible receiver
+* [Librespot](https://github.com/librespot-org/librespot) - Spotify® Connect compatible player  
+* [MPD](https://www.musicpd.org/) - Plays locally stored music headless
 
 
 My setup
