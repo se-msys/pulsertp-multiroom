@@ -1,10 +1,9 @@
 PulseAudio RTP receiver on OpenWRT
 ==================================
 
-I good advice in general is to use similar platforms and audio-interfaces. I use Atheros AR71xx-based with PCM2704 USB audio.
-If possible, run a NTP service on the sender/master node, to make sure the sender and receiver have as synchronized system clock as possible.
+I good advice in general is to use similar platforms and audio-interfaces. I use Atheros AR71xx-based with PCM2704 USB audio. If possible, run a NTP service on the sender/master node, to make sure the sender and receiver have as synchronized system clock as possible.
 
-* Configure networking for your needs on the new node. This is a simple "client node" setup I use for a GL.Inet "3G-Router"
+* Configure networking for your needs on the new node. This is a simple "client node" setup I use for a GL.Inet AR-150 "3G-Router"
 
 __/etc/config/network:__
 
@@ -18,9 +17,14 @@ __/etc/config/network:__
         option ifname 'eth0'
         option proto 'dhcp'
 
+    config interface 'eth1'
+        option ifname 'eth0'
+        option proto 'dhcp'
+
     config interface 'wlan0'
         option ifname 'wlan0'
-        option proto 'dhcp'
+        option proto 'none'
+
 
 * Configure NTP     
 
@@ -39,7 +43,7 @@ __/etc/config/system:__
 
 * Build a image with needed packages. You also might want to skip some firewall/router-related packages to conserve flash.
 
-`make image PACKAGES="-dnsmasq -iptables -ip6tables -ppp -kmod-ppp -ppp-mod-pppoe -kmod-pppox -kmod-nf-nathelper -firewall -odhcpd -odhcp6c -swconfig kmod-usb2 kmod-usb-audio alsa-lib alsa-utils libstdcpp pulseaudio-daemon pulseaudio-profiles pulseaudio-tools"`
+`make image PACKAGES="-dnsmasq -iptables -ip6tables -ppp -kmod-ppp -ppp-mod-pppoe -kmod-pppox -kmod-nf-nathelper -firewall -odhcpd -odhcp6c -swconfig kmod-usb2 kmod-usb-audio alsa-lib alsa-utils libstdcpp pulseaudio-daemon pulseaudio-profiles pulseaudio-tools mosquitto-client-nossl"`
 
 * Transfer new firmware to device
 
@@ -63,8 +67,8 @@ __/etc/pulse/system.pa:__
     set-default-sink alsahw0
 
     # rtp receive
-    #load-module module-rtp-recv latency_msec=1000 sap_address=224.0.0.56
-    load-module module-rtp-recv latency_msec=1000 sap_address=192.168.xxx.xxx      # for unicast
+    load-module module-rtp-recv latency_msec=1000 sap_address=224.0.0.56
+    #load-module module-rtp-recv latency_msec=1000 sap_address=192.168.xxx.xxx      # for unicast
 
 
 __/etc/pulse/daemon.conf__

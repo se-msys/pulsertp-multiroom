@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 # PulseWatcher
+# *** DEPRICATED, use pulsewatcher2.sh on MASTER ***
 #   Watches syslog for Pulseaudio playback start/end
 #   Useful for triggering GPIO outputs and such things
 #
